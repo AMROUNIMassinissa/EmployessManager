@@ -1,0 +1,151 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Employee Management</a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a><span class="glyphicon glyphicon-user"></span> {{loggedUser}}</a></li>
+            <li><a (click)="logout()"><span class="glyphicon glyphicon-log-in"></span> Déconnexion</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-offset-2 col-md-8" style="margin-top:50px">
+
+            <h1>Employee Management</h1>
+            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"
+                (click)="myForm.reset();isSaveVisible=true;">Ajouter Employee</button>
+            <hr>
+            <div class="row">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Poste</th>
+                            <th scope="col">Num</th>
+                            <th scope="col">email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let employee of employees">
+                            <td scope="row">{{employee.nom}}</td>
+                            <td>{{employee.prenom}}</td>
+                            <td>{{employee.poste}}</td>
+                            <td>{{employee.num}}</td>
+                            <td>{{employee.email}}</td>
+                            <td>
+                                <div style="display: table">
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                        data-target="#myModal"
+                                        (click)="viewEmployee(employee._id);enableFields();isSaveVisible=true;">Modifier</button>
+                                    <button type="button" class="btn btn-info btn-sm" style="margin-left:4px;"
+                                        data-toggle="modal" data-target="#myModal"
+                                        (click)="viewEmployee(employee._id);disableFields();isSaveVisible=false;">Visualiser</button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" style="margin-left:4px;"
+                                        (click)="deleteEmployee(employee._id)">Supprimer</button>
+
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form #myForm (submit)="addeditEmployee(_id);reloadpage();myForm.reset()">
+                                <fieldset [disabled]=" fieldsetDisabled">
+                                    <div class="row">
+                                        <div class="col-md-4 form-group">
+                                            <label>Nom</label>
+                                            <input type="text" [(ngModel)]="nom" name="nom" class="form-control">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label>Prénom</label>
+                                            <input type="text" [(ngModel)]="prenom" name="prenom" class="form-control">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label>Sexe</label>
+                                            <div>
+                                                <input type="radio" class="btn-check" [(ngModel)]="sexe" name="sexe"
+                                                    id="option1" autocomplete="off" value="M">
+                                                <label class="btn btn-secondary" for="option1">Masculin</label>
+
+                                                <input type="radio" class="btn-check" [(ngModel)]="sexe" name="sexe"
+                                                    id="option2" autocomplete="off" value="F">
+                                                <label class="btn btn-secondary" for="option2">Féminin</label>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4 form-group">
+                                            <label>Poste</label>
+                                            <input type="text" [(ngModel)]="poste" name="poste" class="form-control">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label>email</label>
+                                            <input type="email" [(ngModel)]="email" name="email" class="form-control">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label>Num</label>
+                                            <input type="number" [(ngModel)]="num" name="num" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 form-group">
+                                            <label>Address</label>
+                                            <input type="text" [(ngModel)]="address" name="address"
+                                                class="form-control">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label>Pays</label>
+                                            <input type="text" [(ngModel)]="pays" name="pays" class="form-control">
+                                        </div>
+                                        <div class="col-md-4 form-group">
+                                            <label>Code postal</label>
+                                            <input type="number" [(ngModel)]="codepos" name="codepos"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4 form-group">
+                                            <label>Salaire</label>
+                                            <input type="number" [(ngModel)]="salaire" name="salaire"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <input type="submit" class="btn btn-success" value="Save"
+                                        *ngIf="this.isSaveVisible">
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
