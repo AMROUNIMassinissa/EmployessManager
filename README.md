@@ -1,4 +1,24 @@
-# EmployeeManger
+# Install MongoDB in your machine:
+
+for windows:
+https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows-unattended/
+
+for mac:
+https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/
+
+# Then Install node.js in your machine from the below link:
+https://nodejs.org/en/download
+
+# install packages.
+Npm install
+
+#  run the project type : node server.js
+# Run project the project using :
+npm start
+
+
+
+# Emplo yeeManger
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.5.
 

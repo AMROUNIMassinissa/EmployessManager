@@ -4,6 +4,8 @@ import { EmployeesComponent } from './employees/employees.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterationComponent } from './registration /registeration.component';
 const routes: Routes = [
+  { path: '', component: LoginComponent },
+
 
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegisterationComponent },
